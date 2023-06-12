@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 MAINTAINER Caesar Wang "wxt@rock-chips.com"
 
 # setup multiarch enviroment
@@ -62,12 +62,12 @@ RUN echo "Update Headers!"
 RUN dpkg -i /packages/arm64/rga/*.deb
 RUN dpkg -i /packages/arm64/mpp/*.deb
 RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-rkmpp/*.deb
-RUN apt-get install -fy --allow-downgrades /packages/arm64/gstreamer/*.deb
-RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-base1.0/*.deb
-RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-bad1.0/*.deb
-RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-good1.0/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/arm64/gstreamer/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-base1.0/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-bad1.0/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-good1.0/*.deb
 
-RUN apt-get install -fy --allow-downgrades /packages/arm64/libv4l/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/arm64/libv4l/*.deb
 #RUN dpkg -i /packages/arm64/gst-rkmpp/*.deb
 #RUN dpkg -i /packages/arm64/ffmpeg/*.deb
 #RUN dpkg -i /packages/arm64/libmali/libmali-midgard-t86x-r18p0-x11*.deb
