@@ -15,8 +15,8 @@ ADD ./overlay/  /
 
 # perpare build dependencies
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y sudo locales git fakeroot devscripts cmake vim qemu-user-static:arm64 binfmt-support \
-        dh-make dh-exec pkg-kde-tools device-tree-compiler:arm64 bc cpio parted dosfstools mtools libssl-dev:arm64 \
-        g++-aarch64-linux-gnu dpkg-dev meson debhelper pkgconf
+        dh-make dh-exec:arm64 pkg-kde-tools:arm64 device-tree-compiler:arm64 bc:arm64 cpio:arm64 parted dosfstools:arm64 mtools:arm64 libssl-dev:arm64 \
+        g++-aarch64-linux-gnu dpkg-dev:arm64 meson:arm64 debhelper:arm64 pkgconf:arm64
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get build-dep -y -a arm64 libdrm
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get build-dep -y -a arm64 xorg-server
@@ -48,6 +48,18 @@ RUN apt-get install -y debhelper-compat libjpeg-dev:arm64 libpng-dev:arm64 libud
 #RUN apt update -y
 #RUN apt build-dep -y libv4l-dev:arm64
 
+#weston
+RUN apt-get update && apt install -y freerdp2-dev:arm64 libcairo2-dev:arm64 libcolord-dev:arm64 libdbus-1-dev:arm64 libdrm-dev:arm64 \
+libegl1-mesa-dev:arm64 libgbm-dev:arm64 libgdk-pixbuf2.0-dev:arm64 libgles2-mesa-dev:arm64 \
+libglu1-mesa-dev:arm64 libgstreamer-plugins-base1.0-dev:arm64 libgstreamer1.0-dev:arm64 \
+libinput-dev:arm64 libjpeg-dev:arm64 liblcms2-dev:arm64 libpam0g-dev:arm64 libpango1.0-dev:arm64 \
+libpixman-1-dev:arm64 libpipewire-0.3-dev:arm64 libpng-dev:arm64 libsystemd-dev:arm64 \
+libudev-dev:arm64 libva-dev:arm64 libvpx-dev:arm64 libwayland-dev:arm64 libwebp-dev:arm64 \
+libx11-dev:arm64 libx11-xcb-dev:arm64 libxcb-composite0-dev:arm64 libxcb-shape0-dev:arm64 \
+libxcb-xfixes0-dev:arm64 libxcb-xkb-dev:arm64 libxcb1-dev:arm64 libxcursor-dev:arm64 \
+libxkbcommon-dev:arm64 libxml2-dev:arm64
+RUN apt-get update && apt build-dep -y weston:arm64
+
 RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
@@ -59,7 +71,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     update-locale LANG=en_US.UTF-8
 
 RUN echo "Update Headers!"
-RUN dpkg -i /packages/arm64/rga/*.deb
+RUN dpkg -i /packages/arm64/rga2/*.deb
 RUN dpkg -i /packages/arm64/mpp/*.deb
 RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-rkmpp/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/arm64/gstreamer/*.deb
@@ -67,8 +79,7 @@ RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-rkmpp/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-bad1.0/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-good1.0/*.deb
 
-#RUN apt-get install -fy --allow-downgrades /packages/arm64/libv4l/*.deb
-#RUN dpkg -i /packages/arm64/gst-rkmpp/*.deb
+RUN apt-get install -fy --allow-downgrades /packages/arm64/libv4l/*.deb
 #RUN dpkg -i /packages/arm64/ffmpeg/*.deb
 #RUN dpkg -i /packages/arm64/libmali/libmali-midgard-t86x-r18p0-x11*.deb
 RUN find /packages/arm64/libdrm -name '*.deb' | sudo xargs -I{} dpkg -x {} /
