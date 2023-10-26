@@ -15,7 +15,7 @@ ADD ./overlay/  /
 
 # perpare build dependencies
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y sudo locales git fakeroot devscripts cmake vim qemu-user-static:armhf binfmt-support \
-        dh-make dh-exec pkg-kde-tools device-tree-compiler:armhf bc cpio parted dosfstools mtools libssl-dev:armhf \
+        dh-make dh-exec device-tree-compiler:armhf bc cpio parted dosfstools mtools libssl-dev:armhf \
         g++-arm-linux-gnueabihf dpkg-dev meson debhelper pkgconf
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get build-dep -y -a armhf libdrm
@@ -29,7 +29,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libdrm-dev:armhf
 
 # gstreamer-rockchip
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libx11-dev:armhf libdrm-dev:armhf libgstreamer1.0-dev:armhf \
-        libgstreamer-plugins-base1.0-dev:armhf
+        libgstreamer-plugins-base1.0-dev:armhf libgstreamer-plugins-base1.0-dev:armhf
 
 # libmali
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libstdc++6:armhf libgbm-dev:armhf libdrm-dev:armhf libx11-xcb1:armhf libxcb-dri2-0:armhf libxdamage1:armhf \
