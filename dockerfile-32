@@ -1,11 +1,11 @@
-FROM debian:bullseye
+FROM debian:bookworm
 MAINTAINER Caesar Wang "wxt@rock-chips.com"
 
 # setup multiarch enviroment
 RUN dpkg --add-architecture armhf
-#RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list
-#RUN echo "deb-src http://deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
-#RUN echo "deb-src http://security.debian.org bullseye/updates main" >> /etc/apt/sources.list
+#RUN echo "deb-src http://deb.debian.org/debian bookworm main" >> /etc/apt/sources.list
+#RUN echo "deb-src http://deb.debian.org/debian bookworm-updates main" >> /etc/apt/sources.list
+#RUN echo "deb-src http://security.debian.org bookworm/updates main" >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y ca-certificates
 
 ADD sources.list /etc/apt/
@@ -59,13 +59,13 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     update-locale LANG=en_US.UTF-8
 
 RUN echo "Update Headers!"
-RUN dpkg -i /packages/armhf/rga/*.deb
+RUN dpkg -i /packages/armhf/rga2/*.deb
 RUN dpkg -i /packages/armhf/mpp/*.deb
 RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-rkmpp/*.deb
-RUN apt-get install -fy --allow-downgrades /packages/armhf/gstreamer/*.deb
-RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-plugins-base1.0/*.deb
-RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-plugins-bad1.0/*.deb
-RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-plugins-good1.0/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/armhf/gstreamer/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-plugins-base1.0/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-plugins-bad1.0/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-plugins-good1.0/*.deb
 
 RUN apt-get install -fy --allow-downgrades /packages/armhf/libv4l/*.deb
 #RUN dpkg -i /packages/armhf/gst-rkmpp/*.deb

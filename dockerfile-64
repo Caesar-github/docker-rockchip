@@ -3,9 +3,9 @@ MAINTAINER Caesar Wang "wxt@rock-chips.com"
 
 # setup multiarch enviroment
 RUN dpkg --add-architecture arm64
-#RUN echo "deb-src http://deb.debian.org/debian bullseye main" >> /etc/apt/sources.list
-#RUN echo "deb-src http://deb.debian.org/debian bullseye-updates main" >> /etc/apt/sources.list
-#RUN echo "deb-src http://security.debian.org bullseye/updates main" >> /etc/apt/sources.list
+#RUN echo "deb-src http://deb.debian.org/debian bookworm main" >> /etc/apt/sources.list
+#RUN echo "deb-src http://deb.debian.org/debian bookworm-updates main" >> /etc/apt/sources.list
+#RUN echo "deb-src http://security.debian.org bookworm/updates main" >> /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y ca-certificates
 ADD sources.list /etc/apt/
@@ -75,7 +75,7 @@ RUN dpkg -i /packages/arm64/rga2/*.deb
 RUN dpkg -i /packages/arm64/mpp/*.deb
 RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-rkmpp/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/arm64/gstreamer/*.deb
-#RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-base1.0/*.deb
+RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-base1.0/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-bad1.0/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-good1.0/*.deb
 
