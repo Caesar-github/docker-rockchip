@@ -59,7 +59,7 @@ RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
     update-locale LANG=en_US.UTF-8
 
 RUN echo "Update Headers!"
-RUN dpkg -i /packages/arm64/rga/*.deb
+RUN dpkg -i /packages/arm64/rga2/*.deb
 RUN dpkg -i /packages/arm64/mpp/*.deb
 RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-rkmpp/*.deb
 RUN apt-get install -fy --allow-downgrades /packages/arm64/gstreamer/*.deb
