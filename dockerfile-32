@@ -14,14 +14,14 @@ ADD ./overlay/  /
 
 # perpare build dependencies
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y sudo locales git fakeroot devscripts cmake vim qemu-user-static:armhf binfmt-support \
-        dh-make dh-exec pkg-kde-tools device-tree-compiler:armhf bc cpio parted dosfstools mtools libssl-dev:armhf \
+        dh-make dh-exec pkg-kde-tools device-tree-compiler:armhf bc cpio parted dosfstools mtools \
         g++-arm-linux-gnueabihf dpkg-dev meson debhelper pkgconf
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get build-dep -y -a armhf libdrm
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get build-dep -y -a armhf xorg-server
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y gstreamer1.0-plugins-bad:armhf gstreamer1.0-plugins-base:armhf gstreamer1.0-tools:armhf \
-        gstreamer1.0-alsa:armhf gstreamer1.0-plugins-base-apps:armhf qtmultimedia5-examples:armhf
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y gstreamer1.0-tools:armhf \
+        gstreamer1.0-alsa:armhf gstreamer1.0-plugins-base-apps:armhf
 
 # rga
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libdrm-dev:armhf
@@ -69,7 +69,7 @@ RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-rkmpp/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-plugins-bad1.0/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/armhf/gst-plugins-good1.0/*.deb
 
-RUN apt-get install -fy --allow-downgrades /packages/armhf/libv4l/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/armhf/libv4l/*.deb
 #RUN dpkg -i /packages/armhf/gst-rkmpp/*.deb
 #RUN dpkg -i /packages/armhf/ffmpeg/*.deb
 #RUN dpkg -i /packages/armhf/libmali/libmali-midgard-t86x-r18p0-x11*.deb

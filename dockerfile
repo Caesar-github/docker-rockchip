@@ -14,14 +14,14 @@ ADD ./overlay/  /
 
 # perpare build dependencies
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y sudo locales git fakeroot devscripts cmake vim qemu-user-static:arm64 binfmt-support \
-        dh-make dh-exec pkg-kde-tools device-tree-compiler:arm64 bc cpio parted dosfstools mtools libssl-dev:arm64 \
+        dh-make dh-exec pkg-kde-tools device-tree-compiler:arm64 bc cpio parted dosfstools mtools \
         g++-aarch64-linux-gnu dpkg-dev meson debhelper pkgconf
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get build-dep -y -a arm64 libdrm
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get build-dep -y -a arm64 xorg-server
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y gstreamer1.0-plugins-bad:arm64 gstreamer1.0-plugins-base:arm64 gstreamer1.0-tools:arm64 \
-        gstreamer1.0-alsa:arm64 gstreamer1.0-plugins-base-apps:arm64 qtmultimedia5-examples:arm64
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y gstreamer1.0-plugins-base:arm64 gstreamer1.0-tools:arm64 \
+        gstreamer1.0-alsa:arm64 gstreamer1.0-plugins-base-apps:arm64
 
 # rga
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y libdrm-dev:arm64
@@ -69,7 +69,7 @@ RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-rkmpp/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-bad1.0/*.deb
 #RUN apt-get install -fy --allow-downgrades /packages/arm64/gst-plugins-good1.0/*.deb
 
-RUN apt-get install -fy --allow-downgrades /packages/arm64/libv4l/*.deb
+#RUN apt-get install -fy --allow-downgrades /packages/arm64/libv4l/*.deb
 #RUN dpkg -i /packages/arm64/gst-rkmpp/*.deb
 #RUN dpkg -i /packages/arm64/ffmpeg/*.deb
 #RUN dpkg -i /packages/arm64/libmali/libmali-midgard-t86x-r18p0-x11*.deb
